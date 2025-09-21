@@ -1,60 +1,60 @@
-# 🖐️ Interface Interactive par Reconnaissance Gestuelle de la Main (Drop - Drag )
+# Interactive Interface via Hand Gesture Recognition (Drop - Drag)
 
-## 📌 Présentation du Projet
+## Project Overview
 
-Ce projet permet de **contrôler une interface graphique en temps réel** en utilisant simplement **vos mains**, grâce à la webcam de votre ordinateur. Il détecte les gestes de votre main (notamment le pincement entre le pouce et l’index) pour interagir avec des formes à l’écran : déplacer des rectangles et des cercles, en ajouter de nouveaux, ou en supprimer — le tout **sans souris ni clavier**.
-
----
-
-## 🎯 À qui s’adresse ce projet ?
-
-- ✅ **Pour les non-techniciens** : Imaginez pouvoir dessiner, organiser ou jouer avec des objets à l’écran… juste en bougeant vos doigts devant la caméra ! C’est intuitif, amusant, et accessible à tous.
-- 🛠️ **Pour les développeurs et passionnés de tech** : Ce projet exploite des bibliothèques avancées de vision par ordinateur (MediaPipe, OpenCV) pour détecter les points clés de la main, calculer des distances en temps réel, et gérer des interactions basées sur des seuils et des événements temporels.
+This project enables you to **control a graphical interface in real time** using only **your hands**, via your computer’s webcam. It detects hand gestures — particularly the pinch between thumb and index finger — to interact with on-screen shapes: move rectangles and circles, add new ones, or delete existing ones — all **without a mouse or keyboard**.
 
 ---
 
-## ⚙️ Fonctionnalités Clés (Explication Technique & Simple)
+## Target Audience
 
-### 1. 🖼️ Détection des mains en temps réel
-- **Technique** : Utilisation de **MediaPipe Hands** (modèle léger `model_complexity=0`) pour détecter 21 points de repère par main, avec une confiance minimale de 0.5.
-- **Simple** : La caméra voit votre main et comprend exactement où se trouvent vos doigts — comme une carte GPS de votre main !
-
-### 2. ✋ Reconnaissance du geste de pincement
-- **Technique** : Calcul de la **distance euclidienne** entre l’extrémité du pouce (`THUMB_TIP`) et de l’index (`INDEX_FINGER_TIP`). Si cette distance est inférieure à un seuil (`threshold_distance`), le geste est activé.
-- **Simple** : Quand vous “pincez” vos doigts comme pour prendre un objet, le système comprend que vous voulez interagir.
-
-### 3. 🖊️ Interaction avec les formes (rectangles & cercles)
-- **Technique** : Vérification de collision entre la position de l’index et les coordonnées des formes. Déplacement via assignation dynamique des coordonnées.
-- **Simple** : Pointez un rectangle ou un cercle, pincez, et déplacez-le où vous voulez — comme un aimant qui suit votre doigt !
-
-### 4. ➕ ➖ Boutons interactifs (Ajouter / Supprimer / Quitter)
-- **Technique** : Zones de détection rectangulaires avec temporisation (`start_time_X`, `click_duration`) pour éviter les clics accidentels.
-- **Simple** : Restez quelques instants avec votre doigt sur un bouton, et l’action s’exécute — comme un clic long sur un smartphone.
-
-### 5. 🔄 Boucle de traitement en temps réel
-- **Technique** : Lecture continue de la webcam (`cv2.VideoCapture`), conversion BGR↔RGB, traitement MediaPipe, rendu OpenCV, affichage avec `cv2.imshow`.
-- **Simple** : Tout se passe en direct, image par image, 30 à 60 fois par seconde — fluide et réactif.
+- **Non-technical users**: Imagine drawing, organizing, or playing with objects on screen… just by moving your fingers in front of the camera! It’s intuitive, fun, and accessible to everyone.
+- **Developers and tech enthusiasts**: This project leverages advanced computer vision libraries (MediaPipe, OpenCV) to detect hand landmarks, compute real-time distances, and manage interactions based on thresholds and temporal events.
 
 ---
 
-## 🧩 Technologies Utilisées
+## Key Features (Technical & Simple Explanation)
 
-| Bibliothèque      | Rôle                                                                 |
-|-------------------|----------------------------------------------------------------------|
-| **OpenCV (cv2)**  | Capture vidéo, affichage, dessin des formes et traitement d’images.  |
-| **MediaPipe**     | Détection précise des points de la main en temps réel.               |
-| **NumPy**         | Calculs mathématiques (distance, coordonnées, transformations).      |
-| **time**          | Gestion des temporisations pour les interactions “longues”.          |
+### 1. Real-Time Hand Detection
+- **Technical**: Uses **MediaPipe Hands** (lightweight model `model_complexity=0`) to detect 21 landmarks per hand, with minimum detection confidence of 0.5.
+- **Simple**: The camera sees your hand and precisely understands where your fingers are — like a GPS map of your hand!
+
+### 2. Pinch Gesture Recognition
+- **Technical**: Computes the **Euclidean distance** between the tip of the thumb (`THUMB_TIP`) and the tip of the index finger (`INDEX_FINGER_TIP`). If this distance falls below a threshold (`threshold_distance`), the gesture is triggered.
+- **Simple**: When you “pinch” your fingers as if grabbing something, the system understands you want to interact.
+
+### 3. Shape Interaction (Rectangles & Circles)
+- **Technical**: Checks for collision between the index finger position and shape coordinates. Movement is achieved by dynamically updating shape positions.
+- **Simple**: Point at a rectangle or circle, pinch, and drag it wherever you want — like a magnet following your finger!
+
+### 4. Interactive Buttons (Add / Remove / Quit)
+- **Technical**: Defines rectangular detection zones with timing logic (`start_time_X`, `click_duration`) to prevent accidental clicks.
+- **Simple**: Hold your finger over a button for a moment, and the action executes — like a long press on a smartphone.
+
+### 5. Real-Time Processing Loop
+- **Technical**: Continuous webcam capture (`cv2.VideoCapture`), BGR↔RGB conversion, MediaPipe processing, OpenCV rendering, and display via `cv2.imshow`.
+- **Simple**: Everything happens live, frame by frame, 30 to 60 times per second — smooth and responsive.
 
 ---
 
-## 🚀 Comment exécuter le projet ?
+## Technologies Used
 
-> ⚠️ Ce projet est fourni sous forme de **fichier Jupyter Notebook (.ipynb)**. Vous devez donc l’exécuter dans un environnement Jupyter (local, Google Colab, etc.).
+| Library           | Role                                                                |
+|-------------------|---------------------------------------------------------------------|
+| **OpenCV (cv2)**  | Video capture, display, drawing shapes, and image processing.       |
+| **MediaPipe**     | Real-time, precise detection of hand landmarks.                     |
+| **NumPy**         | Mathematical computations (distance, coordinates, transformations). |
+| **time**          | Timing management for “long press” interactions.                    |
 
-### Étape 1 : Installer les dépendances
+---
 
-Ouvrez un terminal ou une cellule Jupyter et exécutez :
+## How to Run the Project
+
+> This project is provided as a **Jupyter Notebook file (.ipynb)**. You must run it in a Jupyter environment (local, Google Colab, etc.).
+
+### Step 1: Install Dependencies
+
+Open a terminal or Jupyter cell and run:
 
 ```bash
 pip install opencv-python mediapipe numpy
